@@ -17,6 +17,10 @@ jobs:
       os: linux
       script: echo done $TRAVIS_JOB_NAME
       if: head_repo IS present AND head_repo = repo
+    - name: don't run on PRs and explicit type
+      os: linux
+      script: echo done $TRAVIS_JOB_NAME
+      if: type != pull_request
     - name: run on same repo PRs and explicit type
       os: linux
       script: echo done $TRAVIS_JOB_NAME
@@ -25,7 +29,7 @@ jobs:
       os: windows
       script: echo done $TRAVIS_JOB_NAME
       if: head_repo IS present AND head_repo != repo
-    - name: don't run windows on master and same repo PRs explicit type
+    - name: don't run windows on master and same repo PRs and explicit type
       os: windows
       script: echo done $TRAVIS_JOB_NAME
       if: type = pull_request AND head_repo != repo
