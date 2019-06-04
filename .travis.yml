@@ -9,6 +9,10 @@ jobs:
     - stage: test
       os: linux
       script: echo "done linux"
+    - stage: test_head_repo
+      os: linux
+      script: echo "done linux"
+      if: head_repo = repo
     - stage: test
       os: windows
       script: echo "done win"
