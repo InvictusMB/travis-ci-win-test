@@ -25,6 +25,10 @@ jobs:
       os: linux
       script: echo "done test_head_repo_present linux"
       if: head_repo IS present
+    - stage: test_head_repo_not_present
+      os: linux
+      script: echo "done test_head_repo_not_present linux"
+      if: head_repo IS blank
 branches:
   only: master
 
