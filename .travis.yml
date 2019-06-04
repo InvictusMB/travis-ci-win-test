@@ -27,3 +27,4 @@ jobs:
       if: head_repo IS present
 branches:
   only: master
+
