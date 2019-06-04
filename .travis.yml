@@ -6,24 +6,33 @@ notifications:
 node_js: '10'
 jobs:
   include:
-    - stage: test
+    - name: run always
       os: linux
-      script: echo "done linux"
-    - stage: test_head_repo
+      script: echo done $TRAVIS_JOB_NAME
+    - name: run only outside of PRs
       os: linux
-      script: echo "done test_repo linux"
-      if: head_repo = repo
-    - stage: test_repo_exact
+      script: echo done $TRAVIS_JOB_NAME
+      if: head_repo IS blank
+    - name: run on same repo PRs
       os: linux
-      script: echo "done test_repo_exact linux"
-      if: repo = InvictusMB/travis-ci-win-test
-    - stage: test_head_repo_exact
+      script: echo done $TRAVIS_JOB_NAME
+      if: head_repo IS present AND head_repo = repo
+    - name: don't run on PRs and explicit type
       os: linux
-      script: echo "done test_head_repo_exact linux"
-      if: head_repo = InvictusMB/travis-ci-win-test
-    - stage: test_head_repo_present
+      script: echo done $TRAVIS_JOB_NAME
+      if: type != pull_request
+    - name: run on same repo PRs and explicit type
       os: linux
-      script: echo "done test_head_repo_present linux"
-      if: head_repo IS present
+      script: echo done $TRAVIS_JOB_NAME
+      if: head_repo IS present AND head_repo = repo AND type = pull_request
+    - name: don't run windows on master and same repo PRs
+      os: windows
+      script: echo done $TRAVIS_JOB_NAME
+      if: head_repo IS present AND head_repo != repo
+    - name: don't run windows on master and same repo PRs and explicit type
+      os: windows
+      script: echo done $TRAVIS_JOB_NAME
+      if: type = pull_request AND head_repo != repo
 branches:
   only: master
+
