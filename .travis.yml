@@ -1,0 +1,17 @@
+sudo: false
+language: node_js
+cache: npm
+notifications:
+  email: false
+node_js: '10'
+jobs:
+  include:
+    - stage: test
+      os: linux
+      script: echo "done linux"
+    - stage: test
+      os: windows
+      script: echo "done win"
+      if: head_repo = repo
+branches:
+  only: master
