@@ -11,11 +11,15 @@ jobs:
       script: echo "done linux"
     - stage: test_head_repo
       os: linux
-      script: echo "done linux"
+      script: echo "done test_repo linux"
       if: head_repo = repo
-    - stage: test
-      os: windows
-      script: echo "done win"
-      if: head_repo = repo
+    - stage: test_repo_exact
+      os: linux
+      script: echo "done test_repo_exact linux"
+      if: repo = InvictusMB/travis-ci-win-test
+    - stage: test_head_repo_exact
+      os: linux
+      script: echo "done test_head_repo_exact linux"
+      if: head_repo = InvictusMB/travis-ci-win-test
 branches:
   only: master
