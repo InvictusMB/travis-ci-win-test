@@ -8,23 +8,27 @@ jobs:
   include:
     - name: run always
       os: linux
-      script: echo "done ${TRAVIS_JOB_NAME}"
+      script: echo done $TRAVIS_JOB_NAME
     - name: run only outside of PRs
       os: linux
-      script: echo "done ${TRAVIS_JOB_NAME}"
+      script: echo done $TRAVIS_JOB_NAME
       if: head_repo IS blank
     - name: run on same repo PRs
       os: linux
-      script: echo "done ${TRAVIS_JOB_NAME}"
+      script: echo done $TRAVIS_JOB_NAME
       if: head_repo IS present AND head_repo = repo
     - name: run on same repo PRs and explicit type
       os: linux
-      script: echo "done ${TRAVIS_JOB_NAME}"
+      script: echo done $TRAVIS_JOB_NAME
       if: head_repo IS present AND head_repo = repo AND type = pull_request
     - name: don't run windows on master and same repo PRs
       os: windows
-      script: echo "done ${TRAVIS_JOB_NAME}"
+      script: echo done $TRAVIS_JOB_NAME
       if: head_repo IS present AND head_repo != repo
+    - name: don't run windows on master and same repo PRs explicit type
+      os: windows
+      script: echo done $TRAVIS_JOB_NAME
+      if: type = pull_request AND head_repo != repo
 branches:
   only: master
 
