@@ -21,5 +21,9 @@ jobs:
       os: linux
       script: echo "done test_head_repo_exact linux"
       if: head_repo = InvictusMB/travis-ci-win-test
+    - stage: test_head_repo_present
+      os: linux
+      script: echo "done test_head_repo_present linux"
+      if: head_repo IS present
 branches:
   only: master
